@@ -1,0 +1,41 @@
+server.js
+    config
+    model
+        book.js (name,genre,authorId)
+        author.js (name,age)
+    
+    '/graphql'
+        schema
+            BookType (id,name,genre,AuthorType)
+            AuthorType (id,name,age,[BookType])
+            RootQuery
+                book (BookType)
+                author (AuthorType)
+                books [BookType]
+                authors [AuthorType]
+            Mutation
+                addAuthor (AuthorType)
+                deleteAuthor (AuthorType)
+                updateAuthor (AuthorType)
+                addBook [BookType]
+                deleteBook [BookType]
+                updateBook [BookType]
+            route
+                /graphql
+    
+    '*'
+        static('client/build')
+            queries
+                getAuthors : query {authors}
+                getBooks : query {books}
+                addBook : mutation {addBook}
+            <App/>
+                <BookList/>
+                    displayBooks()
+                        getBooks
+                    <BookDetail/>
+                <AddBook/>
+                    displayAuthors()
+                        getAuthors
+                    submitForm
+                        addBook
